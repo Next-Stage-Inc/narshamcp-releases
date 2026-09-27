@@ -1,0 +1,11 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.Next-Stage-Inc/narshamcp",
+  "version": "0.13.7",
+  "description": "Unreal Engine MCP server: C++ PDB symbols, Blueprint and .uasset analysis, build-error fixes",
+  "websiteUrl": "https://narshaadk.ai/",
+  "repository": {
+    "url": "https://github.com/Next-Stage-Inc/narshamcp-releases",
+    "source": "github"
+  }
+}
