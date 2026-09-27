@@ -23,6 +23,30 @@ Claude Code and Codex. Most reads work from disk with the Unreal Editor closed; 
 >
 > The Fab product is named **NarshaADK**. The installed plugin folder, code module and runtime executable are named **NarshaMCP**.
 
+## Quick start
+
+The runtime is a prebuilt Windows 64-bit executable inside the plugin, and it runs on your machine. There is no hosted MCP endpoint. Python and Node.js are not required.
+
+1. In an Unreal Engine 5.7 or 5.8 C++ project, install NarshaADK from [Fab](https://www.fab.com/listings/c919281c-e2e6-4e81-8228-4e178cbc3e8d) and enable the NarshaMCP plugin, or extract the ZIP for your engine version from the [latest release](https://github.com/Next-Stage-Inc/narshamcp-releases/releases/latest) into `YourProject/Plugins/`.
+2. Build the C++ project once. The first build writes the project's MCP configuration.
+3. If you configure a client by hand, point it at the runtime that ships inside the plugin:
+
+```json
+{
+  "mcpServers": {
+    "narshamcp": {
+      "command": "<Project>/Plugins/NarshaMCP/Source/ThirdParty/bin/narshamcp.exe",
+      "args": ["connect", "--project-path", "<Project>"],
+      "env": { "RUST_LOG": "error" }
+    }
+  }
+}
+```
+
+Fab installs the plugin under the engine's `Plugins` folder (`<UE>/Engine/Plugins/Marketplace/NarshaMCP` or `<UE>/Engine/Plugins/Fab/NarshaMCP`, where `<UE>` is your engine install folder), not in the project. For a Fab install, replace `<Project>/Plugins/NarshaMCP` in the command with that plugin folder. Clients that launch the server as a direct process, such as Cursor, use `--stdio` in place of `connect`.
+
+The full steps are in [Requirements](#requirements), [Install](#install) and [Connect your MCP client](#connect-your-mcp-client).
+
 ## What you can do
 
 Most tools take an `operation` argument. The table lists common read operations. `ue_tool_docs` returns every operation and its parameters, and your client lists the tools under `tools/list`.
@@ -431,6 +455,8 @@ args = ["connect", "--project-path", "<Project>"]
 ```
 
 `connect` attaches the client to the project's background daemon and starts it when none is running. Clients that launch the server as a direct process, such as Cursor, use `--stdio` in place of `connect`.
+
+Fab installs the plugin under the engine's `Plugins` folder (`<UE>/Engine/Plugins/Marketplace/NarshaMCP` or `<UE>/Engine/Plugins/Fab/NarshaMCP`, where `<UE>` is your engine install folder), not in the project. For a Fab install, replace `<Project>/Plugins/NarshaMCP` in the commands above with that plugin folder.
 
 ## How it works
 
